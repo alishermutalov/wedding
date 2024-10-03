@@ -10,13 +10,15 @@ from rest_framework.exceptions import NotFound
 
 ORDINARY_USER, ADMIN = 'ordinary_user', 'admin'
 NEW, CODE_VERIFIED, DONE, PHOTO_DONE= "new", "code_verified","done", "photo_done"
+BASIC, STANDARD, PREMIUM = 'basic', 'standard', 'premium'
 
 
 class User(AbstractUser):
     USER_ROLES = ((ORDINARY_USER, ORDINARY_USER),
                   (ADMIN, ADMIN),) #these choices fields can be changed according to requirements
-    TARIFF_PLANS = ((ORDINARY_USER, ORDINARY_USER),
-                  (ADMIN, ADMIN),) #these choices fields can be changed according to requirements
+    TARIFF_PLANS = ((BASIC, BASIC),
+                  (STANDARD, STANDARD),#these choices fields can be changed according to requirements
+                  (PREMIUM, PREMIUM),) #these choices fields can be changed according to requirements
     AUTH_STATE = (
         (NEW, NEW),
         (CODE_VERIFIED, CODE_VERIFIED),
