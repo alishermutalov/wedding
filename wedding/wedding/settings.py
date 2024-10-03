@@ -43,8 +43,14 @@ INSTALLED_APPS = [
     
     #Internal apps
     'users',
-    'apiv01',
+    'payment',
+    'subscription',
+    'wedding_api',
+    'event_api',
+    'gallery_api',
+    'guest',
     
+    #External apps
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
