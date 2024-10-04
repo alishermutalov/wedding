@@ -30,7 +30,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=15, unique=True)
     auth_status = models.CharField(max_length=155, choices=AUTH_STATE, default=NEW)
     photo = models.ImageField(upload_to='users/avatar/', blank=True, null=True)
-    tariff_plan = models.CharField(max_length=20, choices=TARIFF_PLANS)
+    tariff_plan = models.CharField(max_length=20, choices=TARIFF_PLANS, null=True, blank=True)
     
     def __str__(self) -> str:
         return f"{self.username}"

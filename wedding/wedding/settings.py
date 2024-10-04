@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'event_api',
     'gallery_api',
     'guest',
+    'comment',
     
     #External apps
     'rest_framework',
