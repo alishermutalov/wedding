@@ -16,3 +16,5 @@ class Wedding(models.Model):
     qr_code_style = models.CharField(max_length=255, blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # One user, one wedding
     donation_card_number = models.CharField(max_length=20, blank=True, null=True)
+
+

@@ -13,7 +13,6 @@ class TariffPlan(models.Model):
     tariff_plan = models.CharField(max_length=50, choices=TARIFF_PLANS)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    duration_in_days = models.IntegerField(default=30)  # Duration of the plan, e.g., 30 days
     features = models.JSONField(null=True, blank=True)  # Store plan features as JSON
 
     def __str__(self):
