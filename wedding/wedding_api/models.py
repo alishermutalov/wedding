@@ -14,7 +14,7 @@ class Wedding(models.Model):
     longitude = models.FloatField()
     invitation_style = models.CharField(max_length=255, null=True, blank=True)
     qr_code_style = models.CharField(max_length=255, blank=True, null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # One user, one wedding
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='weddings')
     donation_card_number = models.CharField(max_length=20, blank=True, null=True)
 
 

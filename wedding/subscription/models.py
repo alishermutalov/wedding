@@ -1,7 +1,7 @@
 from datetime import timezone
 from django.db import models
 from users.models import User, BASIC, STANDARD, PREMIUM
-
+from wedding_api.models import Wedding
 
 class TariffPlan(models.Model):
     TARIFF_PLANS = (
@@ -20,16 +20,17 @@ class TariffPlan(models.Model):
     
 
 class Subscription(models.Model):
-    TARIFF_PLANS = (
-        (BASIC,BASIC),
-        (STANDARD,STANDARD),
-        (PREMIUM,PREMIUM),
-    )
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="subscription")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="subscription")
+    wedding = models.ForeignKey(Wedding, on_delete=models.CASCADE, related_name="subscriptions")  # Each subscription is tied to a wedding
     tariff_plan = models.ForeignKey(TariffPlan, on_delete=models.SET_NULL, null=True)
     start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField()
     is_active = models.BooleanField(default=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.end_date and self.wedding:
+            self.end_date = self.wedding.wedding_date
+        super().save(*args, **kwargs)
     
     def update_status(self):
         if timezone.now() > self.end_date:
