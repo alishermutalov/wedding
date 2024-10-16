@@ -11,7 +11,7 @@ class TariffPlan(models.Model):
     )
     name = models.CharField(max_length=50)
     tariff_plan = models.CharField(max_length=50, choices=TARIFF_PLANS)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     features = models.JSONField(null=True, blank=True)  # Store plan features as JSON
 
@@ -24,7 +24,7 @@ class Subscription(models.Model):
     wedding = models.ForeignKey(Wedding, on_delete=models.CASCADE, related_name="subscriptions")  # Each subscription is tied to a wedding
     tariff_plan = models.ForeignKey(TariffPlan, on_delete=models.SET_NULL, null=True)
     start_date = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateTimeField()
+    end_date = models.DateTimeField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
