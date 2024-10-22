@@ -3,6 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
 from django.core.exceptions import PermissionDenied
+from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
 from rest_framework.exceptions import ValidationError, NotFound
@@ -10,6 +11,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, Toke
 from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import NEW, User, CODE_VERIFIED, DONE, PHOTO_DONE
+from subscription.models import TariffPlan, Subscription
 from .utils import check_phone_number, send_sms_verification_code
 
 
@@ -264,3 +266,35 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
         instance.set_password(password)
         instance.save()
         return super().update(instance, validated_data)
+
+
+#I need to check again this serializer
+class ProfileSerializer(serializers.ModelSerializer):
+    # Nested fields to access subscription and tariff plan
+    tariff_plan = serializers.CharField(source='subscription.tariff_plan.tariff_plan', read_only=True)
+    subscription_end_date = serializers.DateTimeField(source='subscription.end_date', read_only=True)
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name', 'phone_number', 'tariff_plan', 'subscription_end_date']
+
+    def update(self, instance, validated_data):
+        # Update user profile fields
+        user = super().update(instance, validated_data)
+
+        # Check if tariff_plan is being updated
+        tariff_plan_data = self.context.get('request').data.get('tariff_plan')
+        if tariff_plan_data:
+            try:
+                # Fetch the selected tariff plan
+                tariff_plan = TariffPlan.objects.get(tariff_plan=tariff_plan_data)
+                
+                # Update or create the subscription for the user
+                subscription, created = Subscription.objects.get_or_create(user=user)
+                subscription.tariff_plan = tariff_plan
+                subscription.is_active = True
+                subscription.save()
+            except TariffPlan.DoesNotExist:
+                raise serializers.ValidationError({'tariff_plan': 'Invalid tariff plan selected.'})
+
+        return user
