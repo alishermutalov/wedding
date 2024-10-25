@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveUpdateAPIView
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.exceptions import ValidationError
@@ -178,3 +178,10 @@ class ResetPasswordAPIView(UpdateAPIView):
             'refresh':user.token()['refresh_token'],
         })
     
+    
+class ProfileView(RetrieveUpdateAPIView):
+    serializer_class = serializers.ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user

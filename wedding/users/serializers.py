@@ -163,12 +163,13 @@ class LoginSerializer(TokenObtainPairSerializer):
     def auth_validate(self,data):
         user_input = data.get('user_input')
         
-        if check_phone_number(user_input):
-            user = User.objects.filter(phone_number=user_input).first()
-            username = user.username
-        elif User.objects.filter(username=user_input).first() is not None:
+        
+        if User.objects.filter(username=user_input).first() is not None:
             user = User.objects.filter(username=user_input).first()
             username= user.username
+        elif check_phone_number(user_input):
+            user = User.objects.filter(phone_number=user_input).first()
+            username = user.username
         else:
             raise NotFound("User not found!")
         
