@@ -2,7 +2,7 @@ from django.db import models
 from rest_framework.exceptions import ValidationError
 from apps.wedding_api.models import Wedding
 from apps.users.utils import check_phone_number
-from django.urls import reverse
+
 
 class Guest(models.Model):
     wedding = models.ForeignKey(Wedding, on_delete=models.CASCADE, related_name="guests")
