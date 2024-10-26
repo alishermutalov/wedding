@@ -1,5 +1,5 @@
 from django.db import models
-from wedding_api.models import Wedding
+from apps.wedding_api.models import Wedding
 from guest.models import Guest
 
 
