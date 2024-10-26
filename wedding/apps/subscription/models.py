@@ -1,6 +1,6 @@
 from datetime import timezone
 from django.db import models
-from users.models import User, BASIC, STANDARD, PREMIUM
+from apps.users.models import User, BASIC, STANDARD, PREMIUM
 from wedding_api.models import Wedding
 
 class TariffPlan(models.Model):
