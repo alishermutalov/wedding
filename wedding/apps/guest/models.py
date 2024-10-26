@@ -1,6 +1,6 @@
 from django.db import models
 from rest_framework.exceptions import ValidationError
-from wedding_api.models import Wedding
+from apps.wedding_api.models import Wedding
 from users.utils import check_phone_number
 from django.urls import reverse
 
