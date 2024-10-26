@@ -1,6 +1,6 @@
 from django.db import models
-from users.models import User, BASIC, STANDARD, PREMIUM
-from subscription.models import TariffPlan, Subscription
+from apps.users.models import User, BASIC, STANDARD, PREMIUM
+from apps.subscription.models import TariffPlan, Subscription
 
 
 class Payment(models.Model):

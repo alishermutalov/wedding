@@ -11,7 +11,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, Toke
 from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import NEW, User, CODE_VERIFIED, DONE, PHOTO_DONE
-from subscription.models import TariffPlan, Subscription
+from apps.subscription.models import TariffPlan, Subscription
 from .utils import check_phone_number, send_sms_verification_code
 
 

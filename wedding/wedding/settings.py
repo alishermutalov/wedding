@@ -42,14 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     #Internal apps
-    'users',
-    'payment',
-    'subscription',
-    'wedding_api',
-    'event_api',
-    'gallery_api',
-    'guest',
-    'comment',
+    'apps.users',
+    'apps.payment',
+    'apps.subscription',
+    'apps.wedding_api',
+    'apps.event_api',
+    'apps.gallery_api',
+    'apps.guest',
+    'apps.comment',
     
     #External apps
     'rest_framework',

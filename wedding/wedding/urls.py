@@ -22,13 +22,13 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/users/', include('users.urls')),
-    path('api/event/', include('event_api.urls')),
-    path('api/gallery/', include('gallery_api.urls')),
-    path('api/guests/', include('guest.urls')),
-    path('api/subscription/', include('subscription.urls')),
-    path('api/wedding/', include('wedding_api.urls')),
-    path('api/payment/', include('payment.urls')),
+    path('api/users/', include('apps.users.urls')),
+    path('api/event/', include('apps.event_api.urls')),
+    path('api/gallery/', include('apps.gallery_api.urls')),
+    path('api/guests/', include('apps.guest.urls')),
+    path('api/subscription/', include('apps.subscription.urls')),
+    path('api/wedding/', include('apps.wedding_api.urls')),
+    path('api/payment/', include('apps.payment.urls')),
     #documnetation
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

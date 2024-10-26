@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class GalleryApiConfig(AppConfig):
+class CommentConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'gallery_api'
+    name = 'apps.comment'
