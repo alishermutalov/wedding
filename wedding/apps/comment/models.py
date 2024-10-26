@@ -1,6 +1,6 @@
 from django.db import models
 from apps.wedding_api.models import Wedding
-from guest.models import Guest
+from apps.guest.models import Guest
 
 
 class Comment(models.Model):
