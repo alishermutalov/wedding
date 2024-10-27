@@ -8,4 +8,6 @@ class TariffPlanSerializer(serializers.ModelSerializer):
         model = TariffPlan
         fields = ['name', 'description', 'tariff_plan', 'price', 'features']
         
-        
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    tariff_plan = TariffPlanSerializer(read_only=True)
