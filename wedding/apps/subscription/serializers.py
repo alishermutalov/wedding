@@ -24,3 +24,7 @@ class SubscriptionSerializer(serializers.ModelSerializer):
             'is_active',
         ]
        
+        read_only_fields = '__all__'
+    
+       
+    
