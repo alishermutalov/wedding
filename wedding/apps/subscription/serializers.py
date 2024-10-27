@@ -13,4 +13,14 @@ class SubscriptionSerializer(serializers.ModelSerializer):
     tariff_plan = TariffPlanSerializer(read_only=True)
     wedding = WeddingSerializer(read_only=True)
     
-   
+    class Meta:
+        model = Subscription
+        fields = [
+            'user',
+            'wedding',
+            'tariff_plan',
+            'start_date',
+            'end_date',
+            'is_active',
+        ]
+       
