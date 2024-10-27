@@ -11,3 +11,4 @@ class TariffPlanSerializer(serializers.ModelSerializer):
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     tariff_plan = TariffPlanSerializer(read_only=True)
+    wedding = ...
