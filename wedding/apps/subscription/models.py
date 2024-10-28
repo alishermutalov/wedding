@@ -36,6 +36,9 @@ class Subscription(models.Model):
         if timezone.now() > self.end_date:
             self.is_active = False
             self.save()
+            
+    def __str__(self):
+        return self.tariff_plan.name
 
 
 
