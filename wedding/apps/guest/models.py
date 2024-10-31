@@ -25,3 +25,7 @@ class Guest(models.Model):
             super().save(*args, **kwargs)
         else:
             raise ValidationError("Invalid phone number format.")
+        
+        
+    def __str__(self):
+        return f"{self.wedding.pk}---{self.first_name} {self.last_name}"
