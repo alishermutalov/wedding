@@ -6,3 +6,6 @@ class Gallery(models.Model):
     wedding = models.ForeignKey(Wedding, on_delete=models.CASCADE, related_name="galleries")
     image = models.ImageField(upload_to="wedding_gallery/")
     description = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"Gallery - {self.wedding.groom_name} & {self.wedding.bride_name}"
